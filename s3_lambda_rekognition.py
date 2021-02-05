@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
 
-
-*Lambda*(/)
+#----------------Lambda--------------#
 from __future__ import print_function
 
 import boto3
@@ -80,11 +78,7 @@ def lambda_handler(event, context):
               "Make sure your object and bucket exist and your bucket is in the same region as this function.")
         raise e
 
-
-# In[ ]:
-
-
-*測試JSON*(/)
+# ---測試JSON-----#
 
 {
   "Records": [

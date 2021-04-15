@@ -81,7 +81,7 @@ def upload_file(file_name, bucket, object_name=None):
 
 
 # 設定 bucket名稱
-bucket_name = "bucketforrekognition"
+BUCKET = "bucketforrekognition"
 for f in files:
-    upload_file(path + f, bucket_name, f)
+    upload_file(path + f, BUCKET, f)
 

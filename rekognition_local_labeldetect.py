@@ -1,10 +1,27 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# In[ ]:
 
 
 import boto3
+import os
+
+
+# In[ ]:
+
+
+path = 'C:/Users/fdj61/Desktop/image_rekognition'
+arr = os.listdir(path)
+files = []
+for a in arr:
+    if(".jpg" in a) or (".png" in a):
+        files.append(path+"/"+a)
+files
+
+
+# In[ ]:
+
 
 # 分析標籤
 def detect_labels_local_file(photo):
@@ -12,21 +29,21 @@ def detect_labels_local_file(photo):
     
     with open(photo, 'rb') as image:
         response = client.detect_labels(Image={'Bytes': image.read()})
-        print('Detected labels in ' + photo)
+        print('*Detected labels in ' + photo)
     
     for label in response['Labels']:
         print (label['Name'] + ' : ' + str(label['Confidence']))
     
     return len(response['Labels'])
 
-def main():
-    # 可自訂在本機中的圖片檔案位置
-    photo="C:/Users/fdj61/Desktop/cat.jpg"
+
+# In[ ]:
+
+
+# 可自訂在本機中的圖片檔案位置
+for photo in files:
     label_count=detect_labels_local_file(photo)
     print("Labels detected: " + str(label_count))
-    
-if __name__ == "__main__":
-    main()
 
 
 # In[ ]:
@@ -62,11 +79,9 @@ def upload_file(file_name, bucket, object_name=None):
         return False
     return True
 
-# from IPython.display import Image # display picture用
 
-# 設定檔案位置與名稱 
-path = "C:/Users/fdj61/Desktop/"
-file = ["cat.jpg", "dog.jpg"]
-for f in file:
-    upload_file(path + f,"amazon-rekognition-fdj612", f)
+# 設定 bucket名稱
+bucket_name = "bucketforrekognition"
+for f in files:
+    upload_file(path + f, bucket_name, f)
 

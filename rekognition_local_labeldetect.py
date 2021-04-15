@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[19]:
 
 
 import boto3
 import os
 
 
-# In[ ]:
+# In[20]:
 
 
 path = 'C:/Users/fdj61/Desktop/image_rekognition'
@@ -20,7 +20,7 @@ for a in arr:
 files
 
 
-# In[ ]:
+# In[21]:
 
 
 # 分析標籤
@@ -37,7 +37,7 @@ def detect_labels_local_file(photo):
     return len(response['Labels'])
 
 
-# In[ ]:
+# In[22]:
 
 
 # 可自訂在本機中的圖片檔案位置
@@ -46,7 +46,7 @@ for photo in files:
     print("Labels detected: " + str(label_count))
 
 
-# In[ ]:
+# In[23]:
 
 
 #　查看 S3的資源狀況
@@ -58,7 +58,7 @@ for buc in buckets:
     print(buc.name)
 
 
-# In[ ]:
+# In[25]:
 
 
 # 上傳檔案到 S3 bucket
@@ -83,5 +83,6 @@ def upload_file(file_name, bucket, object_name=None):
 # 設定 bucket名稱
 BUCKET = "bucketforrekognition"
 for f in files:
-    upload_file(path + f, BUCKET, f)
+    f_name = f.split("/")[-1]
+    upload_file(f, BUCKET, f_name)
 
